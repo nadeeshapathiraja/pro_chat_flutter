@@ -46,10 +46,10 @@ class CustomNetworkImage extends StatelessWidget {
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) return child;
 
-        return const SkeletonAvatar(
+        return SkeletonAvatar(
           style: SkeletonAvatarStyle(
-            width: double.infinity,
-            height: double.infinity,
+            width: width,
+            height: height,
           ),
         );
       },
