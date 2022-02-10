@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:pro_chat/components/custom_images.dart';
 import 'package:pro_chat/components/custom_text.dart';
-import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/screens/main/home/home.dart';
+import 'package:pro_chat/screens/main/users/users_list.dart';
 import 'package:pro_chat/utils/app_colors.dart';
 
 class MainScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  final List<Widget> _screens = const [Home(), Chat()];
+  final List<Widget> _screens = const [Home(), Users()];
 
   Future<bool> initBackButton() async {
     return await showDialog(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pro_chat/components/custom_images.dart';
 import 'package:pro_chat/components/custom_text.dart';
+import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/utils/app_colors.dart';
+import 'package:pro_chat/utils/util_functions.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -58,54 +60,59 @@ class ConversationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
-      decoration: const BoxDecoration(
-        color: kwhite,
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 10),
-            blurRadius: 20.0,
-            color: Colors.black12,
-          ),
-        ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const CircularNetworkImage(
-                height: 60,
-                width: 60,
-                url:
-                    "https://cdn.hashnode.com/res/hashnode/image/upload/v1601295799278/OsMsXdM2F.jpeg",
-              ),
-              const SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  CustomText(
-                    text: "Supun Sandaruan",
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  CustomText(
-                    text: "Really, Thank you",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const CustomText(
-            text: "1 min ago",
-            fontSize: 12,
-            color: greyColor,
-            fontWeight: FontWeight.w500,
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        UtilFunctions.navigateTo(context, const Chat());
+      },
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+        decoration: const BoxDecoration(
+          color: kwhite,
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, 10),
+              blurRadius: 20.0,
+              color: Colors.black12,
+            ),
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                const CircularNetworkImage(
+                  height: 60,
+                  width: 60,
+                  url:
+                      "https://cdn.hashnode.com/res/hashnode/image/upload/v1601295799278/OsMsXdM2F.jpeg",
+                ),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    CustomText(
+                      text: "Supun Sandaruan",
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    CustomText(
+                      text: "Really, Thank you",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const CustomText(
+              text: "1 min ago",
+              fontSize: 12,
+              color: greyColor,
+              fontWeight: FontWeight.w500,
+            ),
+          ],
+        ),
       ),
     );
   }
