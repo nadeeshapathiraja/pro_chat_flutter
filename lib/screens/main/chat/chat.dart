@@ -26,6 +26,7 @@ class _ChatState extends State<Chat> {
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
           itemBuilder: (context, index) {
             return ChatMessageWidget(
               isSender: index % 2 == 0,
@@ -63,12 +64,13 @@ class ChatMessageWidget extends StatelessWidget {
               ? const EdgeInsets.only(right: 10)
               : const EdgeInsets.only(left: 10),
           child: const CustomText(
-            text: "1 min ago",
+            text: "1 minutes ago",
             fontSize: 10,
             color: greyColor,
             fontWeight: FontWeight.w500,
           ),
         ),
+        SizedBox(height: 10),
       ],
     );
   }
