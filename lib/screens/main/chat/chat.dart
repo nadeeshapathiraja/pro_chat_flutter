@@ -1,3 +1,4 @@
+import 'package:chat_bubbles/bubbles/bubble_special_three.dart';
 import 'package:flutter/material.dart';
 import 'package:pro_chat/components/custom_images.dart';
 import 'package:pro_chat/components/custom_text.dart';
@@ -22,8 +23,53 @@ class _ChatState extends State<Chat> {
         ),
         preferredSize: Size.fromHeight(size.height / 10),
       ),
-      body: Container(),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 20),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return ChatMessageWidget(
+              isSender: index % 2 == 0,
+            );
+          },
+          itemCount: 20,
+        ),
+      ),
       bottomNavigationBar: const MessageTypingWidget(),
+    );
+  }
+}
+
+class ChatMessageWidget extends StatelessWidget {
+  const ChatMessageWidget({
+    Key? key,
+    required this.isSender,
+  }) : super(key: key);
+  final bool isSender;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment:
+          isSender ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: [
+        BubbleSpecialThree(
+          text: 'Added iMassage shape bubbles',
+          color: isSender ? primaryColor : greyColor.withOpacity(0.9),
+          isSender: isSender,
+          tail: true,
+          textStyle: const TextStyle(color: Colors.white, fontSize: 16),
+        ),
+        Padding(
+          padding: isSender
+              ? const EdgeInsets.only(right: 10)
+              : const EdgeInsets.only(left: 10),
+          child: const CustomText(
+            text: "1 min ago",
+            fontSize: 10,
+            color: greyColor,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ],
     );
   }
 }
