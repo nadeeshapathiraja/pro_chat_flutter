@@ -23,24 +23,38 @@ class _ChatState extends State<Chat> {
         preferredSize: Size.fromHeight(size.height / 10),
       ),
       body: Container(),
-      bottomNavigationBar: Container(
-        child: Row(
-          children: const [
-            Expanded(
-              flex: 5,
-              child: CustomTextfeild(
-                hintText: 'Write your Message',
-              ),
+      bottomNavigationBar: const MessageTypingWidget(),
+    );
+  }
+}
+
+class MessageTypingWidget extends StatelessWidget {
+  const MessageTypingWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: greyColor.withOpacity(0.4),
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: const [
+          SizedBox(width: 20),
+          Expanded(
+            flex: 5,
+            child: CustomTextfeild(
+              hintText: 'Write your Message',
             ),
-            Expanded(
-              flex: 1,
-              child: Icon(
-                Icons.send,
-                size: 40.0,
-              ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Icon(
+              Icons.send,
+              size: 40.0,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

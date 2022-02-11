@@ -93,7 +93,7 @@ class BottomNavbarTile extends StatelessWidget {
     return InkWell(
       onTap: ontap,
       child: Container(
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
           color: isSelected ? primaryColor : kwhite,
           borderRadius: BorderRadius.circular(15.0),
