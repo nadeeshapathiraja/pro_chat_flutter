@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1010123580860",
+    "project_id": "prochat-f8ad7",
+    "storage_bucket": "prochat-f8ad7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1010123580860:android:3072ba2fc826c660dc77b9",
+        "android_client_info": {
+          "package_name": "com.techsords.chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1010123580860-ln2m6uld1hl0uqmvt0qro58dhdu5p1oa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBemBeCx6dHQ9DHcRPQlN5wqIsInMcuJwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1010123580860-ln2m6uld1hl0uqmvt0qro58dhdu5p1oa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
