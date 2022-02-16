@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1010123580860-m2pk4e9pgmc60f8mqb6nn2lp96v3ufj4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techsords.chat",
+            "certificate_hash": "e956b5e23d94853d70970b3da21b81dc04bbc5ef"
+          }
+        },
+        {
           "client_id": "1010123580860-ln2m6uld1hl0uqmvt0qro58dhdu5p1oa.apps.googleusercontent.com",
           "client_type": 3
         }
