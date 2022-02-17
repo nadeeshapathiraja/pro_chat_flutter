@@ -12,6 +12,7 @@ class CustomButton extends StatelessWidget {
     this.height = 60,
     this.width = double.infinity,
     this.isLoading = false,
+    this.fontColor = kblack,
   }) : super(key: key);
 
   final Function() onTap;
@@ -19,6 +20,7 @@ class CustomButton extends StatelessWidget {
   final double height;
   final double width;
   final bool isLoading;
+  final Color fontColor;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CustomButton extends StatelessWidget {
                   text,
                   style: GoogleFonts.poppins(
                     fontSize: 17,
-                    color: Colors.black,
+                    color: fontColor,
                     fontWeight: FontWeight.w600,
                   ),
                 ),

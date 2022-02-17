@@ -12,10 +12,18 @@ class AuthProvider extends ChangeNotifier {
   //create User credential object
   late UserCredential _userCredential;
 
+//For get user data
+  late User _user;
+
+//Returning firebase user  objects
+  User get user => _user;
+
 //Google signing function
   Future<void> googleAuth() async {
     try {
       _userCredential = await _authController.signInWithGoogle();
+      _user = _userCredential.user!;
+      Logger().i(_userCredential);
       notifyListeners();
     } catch (e) {
       Logger().e(e);
@@ -29,7 +37,9 @@ class AuthProvider extends ChangeNotifier {
         Logger().w('User is currently signed out!');
         UtilFunctions.navigateTo(context, const LoginScreen());
       } else {
-        Logger().d('User is signed in!');
+        Logger().d({'User is signed in!': user});
+        _user = user;
+        notifyListeners();
         UtilFunctions.navigateTo(context, const MainScreen());
       }
     });

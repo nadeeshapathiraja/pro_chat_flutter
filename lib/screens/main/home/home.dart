@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pro_chat/components/custom_images.dart';
 import 'package:pro_chat/components/custom_text.dart';
+import 'package:pro_chat/providers/auth/auth_provider.dart';
 import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/utils/app_colors.dart';
 import 'package:pro_chat/utils/util_functions.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,19 +21,24 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: kwhite,
-
-        elevation: 0,
+        elevation: 2,
         title: const CustomText(
           text: "Message",
           fontSize: 30,
           fontWeight: FontWeight.bold,
         ),
-        actions: const [
-          CustomNetworkImage(
-            height: 45,
-            width: 45,
-            url:
-                "https://cdn.hashnode.com/res/hashnode/image/upload/v1601295799278/OsMsXdM2F.jpeg",
+        actions: [
+          Consumer<AuthProvider>(
+            builder: (context, value, child) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: CustomNetworkImage(
+                  height: 60,
+                  width: 60,
+                  url: value.user.photoURL!,
+                ),
+              );
+            },
           ),
           SizedBox(width: 10),
         ],
