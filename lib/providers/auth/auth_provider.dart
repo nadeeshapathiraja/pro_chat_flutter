@@ -44,4 +44,13 @@ class AuthProvider extends ChangeNotifier {
       }
     });
   }
+
+  //Google logout function
+  Future<void> logout() async {
+    try {
+      await _authController.logOut();
+    } catch (e) {
+      Logger().e(e);
+    }
+  }
 }

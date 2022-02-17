@@ -22,25 +22,39 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         backgroundColor: kwhite,
         elevation: 2,
-        title: const CustomText(
-          text: "Message",
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-        ),
+        title: Consumer<AuthProvider>(builder: (context, value, child) {
+          return CustomText(
+            text: value.user.displayName!,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          );
+        }),
         actions: [
           Consumer<AuthProvider>(
             builder: (context, value, child) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: CustomNetworkImage(
-                  height: 60,
-                  width: 60,
-                  url: value.user.photoURL!,
-                ),
+              return Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      value.logout();
+                    },
+                    icon: const Icon(Icons.logout),
+                    color: greyColor,
+                    iconSize: 30,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: CustomNetworkImage(
+                      height: 60,
+                      width: 60,
+                      url: value.user.photoURL!,
+                    ),
+                  ),
+                ],
               );
             },
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
         ],
         //remove default back button
         automaticallyImplyLeading: false,
