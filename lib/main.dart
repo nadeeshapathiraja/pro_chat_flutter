@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pro_chat/providers/auth/auth_provider.dart';
+import 'package:pro_chat/screens/auth/login.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'screens/splash/splash.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SplashScreen(),
+      home: const LoginScreen(),
       builder: (context, widget) => ResponsiveWrapper.builder(widget,
           maxWidth: 1200,
           minWidth: 480,

@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pro_chat/providers/auth/auth_provider.dart';
-import 'package:provider/provider.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<AuthProvider>(context, listen: false).initializedUser(context);
-    // Future.delayed(const Duration(seconds: 3), () {
-    //   UtilFunctions.navigateTo(context, const MainScreen());
-    // });
-  }
-
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
