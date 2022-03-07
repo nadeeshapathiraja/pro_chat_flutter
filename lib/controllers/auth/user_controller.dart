@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 import 'package:pro_chat/models/objects.dart';
 
-class DatabaseController {
+class UserController {
   //Create firestore Instance
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -14,7 +14,9 @@ class DatabaseController {
     return users
         .doc(userModel.uid)
         .set({userModel.toJson()})
-        .then((value) => Logger().i("User Added"))
+        .then(
+          (value) => Logger().i("User Added"),
+        )
         .catchError(
           (error) => Logger().e("Failed to add user"),
         );
