@@ -7,7 +7,7 @@ class UserModel {
   String email;
   String lastseen;
   bool isOnline;
-  String? img;
+  String img;
 
   UserModel({
     required this.uid,
@@ -15,7 +15,7 @@ class UserModel {
     required this.email,
     required this.lastseen,
     required this.isOnline,
-    this.img,
+    required this.img,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>

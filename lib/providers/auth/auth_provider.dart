@@ -35,16 +35,21 @@ class AuthProvider extends ChangeNotifier {
       _user = _userCredential.user!;
 
       //Save userdata in cloud firestore
-      await _userController.saveUserInformation(UserModel(
-        uid: _user.uid,
-        name: _user.displayName!,
-        email: _user.email!,
-        lastseen: DateTime.now().toString(),
-        isOnline: true,
-        img: _user.photoURL!,
-      ));
+      await _userController.saveUserInformation(
+        UserModel(
+          uid: _user.uid,
+          name: _user.displayName!,
+          email: _user.email!,
+          lastseen: DateTime.now().toString(),
+          isOnline: true,
+          img: _user.photoURL!,
+        ),
+      );
 
-      Logger().i(_userCredential);
+      //Fetch logged in user data
+      // await fetchSingleUser();
+
+      // Logger().i(_userCredential);
       notifyListeners();
     } catch (e) {
       Logger().e(e);
@@ -55,6 +60,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> fetchSingleUser() async {
     try {
       _userModel = (await _userController.getUserData(_user.uid))!;
+      Logger().i(_userModel.toJson());
       notifyListeners();
     } catch (e) {
       Logger().e(e);
@@ -63,13 +69,14 @@ class AuthProvider extends ChangeNotifier {
 
   //Initialize user function
   Future<void> initializedUser(BuildContext context) async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
       if (user == null) {
         Logger().w('User is currently signed out!');
         UtilFunctions.navigateTo(context, const LoginScreen());
       } else {
         Logger().d({'User is signed in!': user});
         _user = user;
+        await fetchSingleUser();
         notifyListeners();
         UtilFunctions.navigateTo(context, const MainScreen());
       }
