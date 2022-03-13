@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pro_chat/components/custom_images.dart';
 import 'package:pro_chat/components/custom_text.dart';
+import 'package:pro_chat/controllers/auth/user_controller.dart';
 import 'package:pro_chat/providers/auth/auth_provider.dart';
 import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/utils/app_colors.dart';
@@ -60,16 +62,28 @@ class _UsersState extends State<Users> {
         automaticallyImplyLeading: false,
       ),
       body: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          width: size.width,
-          height: size.height,
-          child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) {
-                return const UserCard();
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        width: size.width,
+        height: size.height,
+        child: Consumer<AuthProvider>(
+          builder: (context, value, child) {
+            return StreamBuilder<QuerySnapshot>(
+              // stream: UserController().
+              builder: (context, snapshot) {
+                return ListView.separated(
+                  physics: const BouncingScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return const UserCard();
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 5),
+                  itemCount: 10,
+                );
               },
-              separatorBuilder: (context, index) => const SizedBox(height: 5),
-              itemCount: 10)),
+            );
+          },
+        ),
+      ),
     );
   }
 }
