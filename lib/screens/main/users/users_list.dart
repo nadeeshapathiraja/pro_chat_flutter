@@ -66,7 +66,7 @@ class _UsersState extends State<Users> {
           child: ListView.separated(
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return const ConversationCard();
+                return const UserCard();
               },
               separatorBuilder: (context, index) => const SizedBox(height: 5),
               itemCount: 10)),
@@ -74,8 +74,8 @@ class _UsersState extends State<Users> {
   }
 }
 
-class ConversationCard extends StatelessWidget {
-  const ConversationCard({
+class UserCard extends StatelessWidget {
+  const UserCard({
     Key? key,
   }) : super(key: key);
 
@@ -111,26 +111,41 @@ class ConversationCard extends StatelessWidget {
                 const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    CustomText(
-                      text: "Supun Sandaruan",
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                  children: [
+                    Row(
+                      children: const [
+                        CustomText(
+                          text: "Supun Sandaruan",
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(width: 5),
+                        Icon(
+                          Icons.circle,
+                          size: 10,
+                          color: Colors.greenAccent,
+                        )
+                      ],
                     ),
-                    CustomText(
-                      text: "Really, Thank you",
-                      fontSize: 14,
+                    const CustomText(
+                      text: "1 min ago",
+                      fontSize: 12,
+                      color: greyColor,
                       fontWeight: FontWeight.w500,
                     ),
                   ],
                 ),
               ],
             ),
-            const CustomText(
-              text: "1 min ago",
-              fontSize: 12,
-              color: greyColor,
-              fontWeight: FontWeight.w500,
+            ElevatedButton.icon(
+              onPressed: () {},
+              icon: Icon(Icons.chat),
+              label: CustomText(
+                text: "Start Chat",
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: kwhite,
+              ),
             ),
           ],
         ),

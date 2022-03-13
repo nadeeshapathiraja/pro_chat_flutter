@@ -38,10 +38,4 @@ class UserController {
       Logger().e(e);
     }
   }
-
-  //me user ge details db eke ndda
-  //mail autendication eka wela sir
-  //annoth data firestore ekata yanne ne
-  //login eka run karannna
-
 }
