@@ -13,12 +13,12 @@ class UserController {
   Future<void> saveUserInformation(UserModel userModel) {
     return users
         .doc(userModel.uid)
-        .set({userModel.toJson()})
+        .set(userModel.toJson())
         .then(
           (value) => Logger().i("User Added"),
         )
         .catchError(
-          (error) => Logger().e("Failed to add user"),
+          (error) => Logger().e("Failed to add user: $error"),
         );
   }
 
@@ -30,6 +30,7 @@ class UserController {
 
       UserModel userModel =
           UserModel.fromJson(snapshot.data() as Map<String, dynamic>);
+
       Logger().d(userModel.name);
 
       return userModel;
@@ -37,4 +38,10 @@ class UserController {
       Logger().e(e);
     }
   }
+
+  //me user ge details db eke ndda
+  //mail autendication eka wela sir
+  //annoth data firestore ekata yanne ne
+  //login eka run karannna
+
 }
