@@ -39,7 +39,8 @@ class UserController {
     }
 
     //Retrive user data
-    Stream<QuerySnapshot> getAllUsers(String uid) =>
-        users.where('uid', isNotEqualTo: uid).snapshots();
   }
+
+  Stream<QuerySnapshot> getAllUsers(String uid) =>
+      users.where('uid', isNotEqualTo: uid).snapshots();
 }

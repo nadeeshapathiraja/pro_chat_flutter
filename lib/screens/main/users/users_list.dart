@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 import 'package:pro_chat/components/custom_images.dart';
 import 'package:pro_chat/components/custom_text.dart';
 import 'package:pro_chat/controllers/auth/user_controller.dart';
+import 'package:pro_chat/models/objects.dart';
 import 'package:pro_chat/providers/auth/auth_provider.dart';
 import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/utils/app_colors.dart';
@@ -17,6 +19,7 @@ class Users extends StatefulWidget {
 }
 
 class _UsersState extends State<Users> {
+  List<UserModel> list = [];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -68,16 +71,38 @@ class _UsersState extends State<Users> {
         child: Consumer<AuthProvider>(
           builder: (context, value, child) {
             return StreamBuilder<QuerySnapshot>(
-              // stream: UserController().
+              stream: UserController().getAllUsers(value.userModel.uid),
               builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const CustomText(text: "No Users");
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                }
+
+                Logger().w(snapshot.data!.docs.length);
+
+                list.clear();
+
+                for (var item in snapshot.data!.docs) {
+                  Map<String, dynamic> data =
+                      item.data() as Map<String, dynamic>;
+
+                  var model = UserModel.fromJson(data);
+
+                  list.add(model);
+                }
+
                 return ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return const UserCard();
+                    return UserCard(
+                      model: list[index],
+                    );
                   },
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 5),
-                  itemCount: 10,
+                  itemCount: list.length,
                 );
               },
             );
@@ -91,7 +116,10 @@ class _UsersState extends State<Users> {
 class UserCard extends StatelessWidget {
   const UserCard({
     Key? key,
+    required this.model,
   }) : super(key: key);
+
+  final UserModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +144,19 @@ class UserCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CircularNetworkImage(
+                CircularNetworkImage(
                   height: 60,
                   width: 60,
-                  url:
-                      "https://cdn.hashnode.com/res/hashnode/image/upload/v1601295799278/OsMsXdM2F.jpeg",
+                  url: model.img,
                 ),
                 const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      children: const [
+                      children: [
                         CustomText(
-                          text: "Supun Sandaruan",
+                          text: model.name,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
@@ -137,7 +164,8 @@ class UserCard extends StatelessWidget {
                         Icon(
                           Icons.circle,
                           size: 10,
-                          color: Colors.greenAccent,
+                          color:
+                              model.isOnline ? Colors.greenAccent : greyColor,
                         )
                       ],
                     ),
