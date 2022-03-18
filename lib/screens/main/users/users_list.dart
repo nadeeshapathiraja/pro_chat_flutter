@@ -10,6 +10,7 @@ import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/utils/app_colors.dart';
 import 'package:pro_chat/utils/util_functions.dart';
 import 'package:provider/provider.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class Users extends StatefulWidget {
   const Users({Key? key}) : super(key: key);
@@ -169,8 +170,8 @@ class UserCard extends StatelessWidget {
                         )
                       ],
                     ),
-                    const CustomText(
-                      text: "1 min ago",
+                    CustomText(
+                      text: timeago.format(DateTime.parse(model.lastseen)),
                       fontSize: 12,
                       color: greyColor,
                       fontWeight: FontWeight.w500,
