@@ -86,6 +86,8 @@ class AuthProvider extends ChangeNotifier {
   //Google logout function
   Future<void> logout() async {
     try {
+      //Update user online state and last seen
+      await _userController.updateUserInformation(_user.uid);
       await _authController.logOut();
     } catch (e) {
       Logger().e(e);

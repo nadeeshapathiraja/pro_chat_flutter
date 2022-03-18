@@ -14,12 +14,8 @@ class UserController {
     return users
         .doc(userModel.uid)
         .set(userModel.toJson())
-        .then(
-          (value) => Logger().i("User Added"),
-        )
-        .catchError(
-          (error) => Logger().e("Failed to add user: $error"),
-        );
+        .then((value) => Logger().i("User Added"))
+        .catchError((error) => Logger().e("Failed to add user: $error"));
   }
 
 //get login user data
@@ -39,6 +35,18 @@ class UserController {
     }
 
     //Retrive user data
+  }
+
+  //Update user Information
+  Future<void> updateUserInformation(String uid) {
+    return users
+        .doc(uid)
+        .update({
+          "isOnline": false,
+          "lastseen": DateTime.now().toString(),
+        })
+        .then((value) => Logger().i("User online states Updated"))
+        .catchError((error) => Logger().e("Failed to Update user: $error"));
   }
 
   Stream<QuerySnapshot> getAllUsers(String uid) =>

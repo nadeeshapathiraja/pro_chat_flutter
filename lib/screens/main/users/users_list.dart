@@ -78,7 +78,7 @@ class _UsersState extends State<Users> {
                   return const CustomText(text: "No Users");
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 Logger().w(snapshot.data!.docs.length);
