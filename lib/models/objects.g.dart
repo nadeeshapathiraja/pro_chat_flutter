@@ -23,3 +23,25 @@ Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'isOnline': instance.isOnline,
       'img': instance.img,
     };
+
+ConversationModel _$ConversationModelFromJson(Map<String, dynamic> json) =>
+    ConversationModel(
+      id: json['id'] as String,
+      users: json['users'] as List<dynamic>,
+      userArray: (json['userArray'] as List<dynamic>)
+          .map((e) => UserModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      lastMessage: json['lastMessage'] as String,
+      lastMessageTime: json['lastMessageTime'] as String,
+      createdBy: json['createdBy'] as String,
+    );
+
+Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'users': instance.users,
+      'userArray': instance.userArray.map((e) => e.toJson()).toList(),
+      'lastMessage': instance.lastMessage,
+      'lastMessageTime': instance.lastMessageTime,
+      'createdBy': instance.createdBy,
+    };

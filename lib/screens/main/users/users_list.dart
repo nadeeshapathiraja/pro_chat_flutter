@@ -181,7 +181,9 @@ class UserCard extends StatelessWidget {
               ],
             ),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                UtilFunctions.navigateTo(context, Chat());
+              },
               icon: Icon(Icons.chat),
               label: CustomText(
                 text: "Start Chat",
