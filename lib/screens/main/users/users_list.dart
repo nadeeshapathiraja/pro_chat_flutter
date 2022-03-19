@@ -6,6 +6,7 @@ import 'package:pro_chat/components/custom_text.dart';
 import 'package:pro_chat/controllers/auth/user_controller.dart';
 import 'package:pro_chat/models/objects.dart';
 import 'package:pro_chat/providers/auth/auth_provider.dart';
+import 'package:pro_chat/providers/chat/chat_provider.dart';
 import 'package:pro_chat/screens/main/chat/chat.dart';
 import 'package:pro_chat/utils/app_colors.dart';
 import 'package:pro_chat/utils/util_functions.dart';
@@ -180,17 +181,23 @@ class UserCard extends StatelessWidget {
                 ),
               ],
             ),
-            ElevatedButton.icon(
-              onPressed: () {
-                UtilFunctions.navigateTo(context, Chat());
+            Consumer<ChatProvider>(
+              builder: (context, value, child) {
+                return value.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : ElevatedButton.icon(
+                        onPressed: () {
+                          value.createConversation(context, model);
+                        },
+                        icon: const Icon(Icons.chat),
+                        label: const CustomText(
+                          text: "Start Chat",
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          color: kwhite,
+                        ),
+                      );
               },
-              icon: Icon(Icons.chat),
-              label: CustomText(
-                text: "Start Chat",
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: kwhite,
-              ),
             ),
           ],
         ),
